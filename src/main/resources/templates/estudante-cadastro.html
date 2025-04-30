@@ -9,18 +9,39 @@
 
 <body>
 
-<form th:action="@{/estudante}" method="post">
+<form enctype="multipart/form-data" th:action="@{/estudante}" method="post" th:object="${estudante}">
+
+    <div th:if="${#fields.hasErrors()}">
+
+        <ul>
+            <li th:each="erro : ${#fields.errors}">
+                <span th:text="${erro}"></span>
+            </li>
+        </ul>
+
+    </div>
+
 
     <div>
         <input type="text" name="nome">
+        <div th:if="${#fields.hasErrors('nome')}">
+            <span th:errors="*{nome}"></span>
+        </div>
     </div>
 
     <div>
         <input type="text" name="matricula">
+        <div th:if="${#fields.hasErrors('matricula')}">
+            <span th:errors="*{matricula}"></span>
+        </div>
     </div>
 
     <div>
         <input type="date" name="dataNascimento">
+    </div>
+
+    <div>
+        <input type="file" name="avatar">
     </div>
 
     <div>
